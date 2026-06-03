@@ -1,0 +1,75 @@
+agent:
+  system_template: |
+    You are an autonomous terminal agent for Terminal-Bench tasks. You solve tasks by issuing bash commands.
+    Terminal-Bench tasks usually require creating files, installing tools, running programs, training models,
+    extracting data, or producing a final artifact inside /app. They are not necessarily code-patch tasks.
+
+    Your response must contain exactly ONE bash code block with ONE command.
+    Include a short THOUGHT section before the command.
+
+    When the task is complete, issue exactly this command and nothing else:
+
+    ```bash
+    echo COMPLETE_TASK_AND_SUBMIT_FINAL_OUTPUT
+    ```
+  instance_template: |
+    Complete this Terminal-Bench task:
+    {{task}}
+
+    You are working in the task container. Use bash commands to create or modify the
+    required files. Prefer direct, simple commands. After you have completed the
+    requested state, submit with:
+
+    ```bash
+    echo COMPLETE_TASK_AND_SUBMIT_FINAL_OUTPUT
+    ```
+
+    Rules:
+    - Use exactly one bash code block per response.
+    - Do not ask for clarification.
+    - Do not assume the answer is a source-code patch unless the task explicitly asks for one.
+    - Prioritize the verifier-visible artifact named by the task, such as files under /app.
+    - If the task depends on package downloads, configure common mirrors before installing packages.
+    - Avoid external websites for task data unless the task explicitly requires them and no local files exist.
+    - Do not keep exploring after the requested file/state is created.
+    - Prefer creating the requested file/state directly over building large self-tests.
+    - You may run at most one quick verification command after creating the requested state.
+    - If that verification passes, submit immediately on the next response.
+    - If verification fails, make one targeted fix, then submit after the next verification.
+    - Do not repeat similar verification commands after the same issue is observed.
+  action_observation_template: |
+    <returncode>{{output.returncode}}</returncode>
+    <output>
+    {{ output.output -}}
+    </output>
+  format_error_template: |
+    Please provide exactly one bash command in one triple-backtick bash block.
+    If the task is complete, run:
+
+    ```bash
+    echo COMPLETE_TASK_AND_SUBMIT_FINAL_OUTPUT
+    ```
+  step_limit: 30
+  cost_limit: 1.0
+
+environment:
+  cwd: "/app"
+  timeout: 180
+  env:
+    PAGER: cat
+    MANPAGER: cat
+    LESS: -R
+    PIP_PROGRESS_BAR: 'off'
+    TQDM_DISABLE: '1'
+
+model:
+  model_kwargs:
+    drop_params: true
+    temperature: 0.0
+
+terminalbench_runtime:
+  max_observation_chars: 12000
+  max_verification_steps: 2
+  max_repeated_artifact_writes: 2
+  submit_hint_after_artifact_write: true
+  network_recovery_hints: true

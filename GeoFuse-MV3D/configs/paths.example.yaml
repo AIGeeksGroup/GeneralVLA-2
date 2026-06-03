@@ -1,0 +1,36 @@
+project:
+  name: main_provider_appaff_softvh_alpha05_sameindex_geomblend
+
+paths:
+  sam3d_objects_repo: /path/to/sam-3d-objects
+  gso_root: /path/to/GSO
+  source_a_root: /path/to/main_provider_appaff_softvh_th045_so012_s008
+  source_b_root: /path/to/novggt_axisgrid_s020_appaff_s80
+  source_a_base_root: ""
+  source_b_base_root: ""
+  output_root: /path/to/main_provider_appaff_softvh_alpha05_sameindex_geomblend
+
+runtime:
+  cuda_visible_devices: "2"
+  views: 5
+  image_names: "0,1,2,3,4"
+  input_views: "0-4"
+  target_views: "10-24"
+  render_dir: render_mvs_25
+  resolution: 256
+
+pipeline:
+  rebuild_source_a: false
+  rebuild_source_b: false
+  source_a:
+    support_threshold: 0.45
+    support_softness: 0.12
+    max_shrink: 0.008
+    max_opacity_drop: 0.0
+  source_b:
+    steps: 80
+    max_axis_scale: 1.02
+    min_axis_scale: 0.98
+    max_shift: 0.008
+  blend:
+    alpha: 0.5

@@ -1,0 +1,48 @@
+method_name: main_provider_appaff_softvh_alpha05_sameindex_geomblend
+input_views: [0, 1, 2, 3, 4]
+views: 5
+
+source_chain:
+  source_a: main_provider_appaff_softvh_th045_so012_s008
+  source_b: novggt_axisgrid_s020_appaff_s80
+  final_stage: geometry_only_same_index_blend
+
+soft_visual_hull:
+  support_threshold: 0.45
+  support_softness: 0.12
+  max_shrink: 0.008
+  max_opacity_drop: 0.0
+  min_visible_views: 2
+  nvs_focal: 1.0
+  nvs_transform: perm012_signpnn
+
+axis2_branch:
+  script: optimize_gaussian_axis_refine_meshsync.py
+  steps: 80
+  max_axis_scale: 1.02
+  min_axis_scale: 0.98
+  max_shift: 0.008
+  note: "This branch supplies no-VGGT low-dimensional geometry compensation."
+
+sameindex_blend:
+  alpha: 0.5
+  blend_ply_fields: [x, y, z]
+  blend_mesh_vertices: true
+  fallback: copy_source_a_when_topology_or_vertex_count_is_incompatible
+
+metrics_full30_approx:
+  baseline:
+    cd_e3: 45.8759
+    psnr: 13.242106
+    ssim: 0.805061
+    lpips: 0.279508
+  this_method:
+    cd_e3: 44.7949
+    psnr: 13.552471
+    ssim: 0.813360
+    lpips: 0.273675
+  relative_to_baseline:
+    cd: "+2.36%"
+    psnr: "+2.34%"
+    ssim: "+1.03%"
+    lpips: "+2.09%"

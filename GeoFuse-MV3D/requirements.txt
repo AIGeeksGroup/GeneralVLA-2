@@ -1,0 +1,11 @@
+numpy
+Pillow
+plyfile
+trimesh
+scipy
+opencv-python
+scikit-image
+lpips
+torch
+pytest
+PyYAML

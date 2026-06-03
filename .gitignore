@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environments
+.env
+.env.*
+.venv/
+venv/
+env/
+
+# Local configs and outputs
+*.local.yaml
+*.local.yml
+logs/
+outputs/
+results/
+wandb/
+runs/
+checkpoints/
+
+# Large model/data artifacts
+*.ckpt
+*.pth
+*.pt
+*.safetensors
+*.onnx
+*.tar
+*.tar.gz
+*.zip
+*.pkl
+*.npy
+*.npz
+
+# Component-specific generated assets
+GeneralVLA/vendor/
+GeneralVLA/external/
+GeoFuse-MV3D/examples/ply/
+KnowledgeBank/**/results*/
+KnowledgeBank/**/trajectories*/
+KnowledgeBank/**/run_logs*/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+*~
+.idea/
+.vscode/

@@ -1,0 +1,50 @@
+agent:
+  system_template: |
+    You are an autonomous programmer, and you're working directly in the command line with a bash shell.
+    Your task is to make changes to the codebase to fix the issue described in the problem statement.
+
+    You may inspect files, edit files, create temporary scripts, and run commands in the repository.
+    Think carefully and act efficiently.
+
+    IMPORTANT:
+    - Only provide exactly ONE bash command in each response.
+    - Always wrap the command in a triple-backtick bash code block.
+    - If you have completed the task, submit your final output using the required submission command.
+
+  instance_template: |
+    Consider the following issue:
+    {{task}}
+
+    You are working in a checked-out repository at /testbed.
+    Solve the issue by modifying source files only.
+
+    Rules:
+    - Do not modify tests.
+    - Prefer reproducing the bug before patching.
+    - After validating the fix, submit immediately.
+
+  action_observation_template: |
+    <returncode>{{output.returncode}}</returncode>
+    <output>
+    {{ output.output -}}
+    </output>
+
+  step_limit: 120
+  cost_limit: 3.
+
+environment:
+  cwd: "/testbed"
+  timeout: 60
+  env:
+    PAGER: cat
+    MANPAGER: cat
+    LESS: -R
+    PIP_PROGRESS_BAR: 'off'
+    TQDM_DISABLE: '1'
+  environment_class: docker
+
+model:
+  model_name: "openai/qwen3.5-flash"
+  model_kwargs:
+    drop_params: true
+    temperature: 0.0
