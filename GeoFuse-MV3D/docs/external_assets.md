@@ -51,6 +51,16 @@ If the colleague only wants to rerun this packaged branch, they can provide
 already generated `source_a_root` and `source_b_root` output trees instead of
 rerunning the upstream MV-SAM3D generation step.
 
+### VGGT
+
+Some upstream source branches are VGGT-derived. Use the official VGGT release
+when regenerating those branches:
+
+```text
+https://github.com/facebookresearch/vggt
+https://huggingface.co/facebook/VGGT-1B
+```
+
 ### Depth Anything 3 / DA3
 
 DA3 was used by some upstream provider branches, not by the final same-index

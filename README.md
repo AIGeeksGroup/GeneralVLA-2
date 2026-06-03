@@ -54,5 +54,14 @@ external assets described by each component, including model checkpoints,
 benchmark datasets, WebArena services, GSO assets, and robot/runtime-specific
 configuration.
 
+Component asset entry points:
+
+- `GeneralVLA/`: project model assets are expected from
+  `https://huggingface.co/AIGeeksGroup/GeneralVLA`.
+- `GeoFuse-MV3D/`: use the official upstream assets documented in
+  `GeoFuse-MV3D/docs/external_assets.md`.
+- `KnowledgeBank/`: use the official benchmark/model-provider assets documented
+  in `KnowledgeBank/README.md`.
+
 Do not commit API keys, model checkpoints, local datasets, generated results, or
 private trajectories.

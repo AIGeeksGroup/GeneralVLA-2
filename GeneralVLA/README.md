@@ -32,11 +32,19 @@ GitHub stores code only. Pretrained models and checkpoints are hosted on Hugging
 
 - `https://huggingface.co/AIGeeksGroup/GeneralVLA`
 
-To fetch repository-local model assets:
+To fetch repository-local model assets with Git:
 
 ```bash
 cd <repo-root>
 git clone https://huggingface.co/AIGeeksGroup/GeneralVLA vendor/GeneralVLA/pretrain_model
+```
+
+Alternatively, use the Hugging Face CLI:
+
+```bash
+cd <repo-root>
+pip install 'huggingface-hub[cli]<1.0'
+hf download AIGeeksGroup/GeneralVLA --local-dir vendor/GeneralVLA/pretrain_model
 ```
 
 If you already have a local copy of the assets, place them under:
@@ -46,6 +54,19 @@ If you already have a local copy of the assets, place them under:
 - `vendor/GeneralVLA/pretrain_model/sam_vit_h_4b8939.pth`
 - `vendor/GeneralVLA/pretrain_model/clip-vit-large-patch14`
 - `vendor/GeneralVLA/pretrain_model/checkpoints/v1/checkpoint-rs.tar`
+
+Legacy demo/evaluation scripts may also use:
+
+- `vendor/GeneralVLA/pretrain_model/segagent/SegAgent-Model`
+- `vendor/GeneralVLA/pretrain_model/simpleclick/cocolvis_vit_large.pth`
+
+All GeneralVLA-local model assets should be taken from the same project asset
+repository above. The following upstream models are referenced by name in the
+code and can also be downloaded from their official sources if needed:
+
+- `openai/clip-vit-large-patch14`: `https://huggingface.co/openai/clip-vit-large-patch14`
+- Qwen/Qwen-VL grounding models: `https://huggingface.co/Qwen`
+- SAM ViT-H checkpoint: `https://github.com/facebookresearch/segment-anything`
 
 Notes:
 
