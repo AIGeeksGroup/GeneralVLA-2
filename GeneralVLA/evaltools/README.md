@@ -81,7 +81,7 @@ The input JSON file should contain a list of prediction data with the following 
           "counts": "compressed_rle_string",
           "size": [480, 640]
         },
-        "outputs": "Current IOU: 85.2, Positive point: (0.5, 0.3)"
+        "outputs": "Current IOU: <value>, Positive point: (<x>, <y>)"
       }
     ],
     "click_id": 0
@@ -100,8 +100,8 @@ The tool generates several output files:
 
 | image_name | mask_idx | iou | caption |
 |------------|----------|-----|---------|
-| image1.jpg | 0 | 0.856 | object description |
-| image1.jpg | -1 | 0.856 | (summary for image) |
+| image1.jpg | 0 | `<iou>` | object description |
+| image1.jpg | -1 | `<iou>` | (summary for image) |
 
 ## Evaluation Splits
 

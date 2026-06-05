@@ -118,19 +118,3 @@ python scripts/evaluate_gso30_four_metrics.py \
   --nvs_zflip \
   --nvs_focal 1.0
 ```
-
-## Recorded Metrics
-
-```text
-baseline full30 approx:
-  CD    = 45.8759e-3
-  PSNR  = 13.242106
-  SSIM  = 0.805061
-  LPIPS = 0.279508
-
-this method full30 approx:
-  CD    = 44.7949e-3
-  PSNR  = 13.552471
-  SSIM  = 0.813360
-  LPIPS = 0.273675
-```

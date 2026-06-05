@@ -166,20 +166,6 @@ python scripts/evaluate_gso30_four_metrics.py \
   --nvs_focal 1.0
 ```
 
-## Recorded Full30 Approx Result
-
-The recorded result from the experiment notes is:
-
-| Method | CD ↓ | PSNR ↑ | SSIM ↑ | LPIPS ↓ |
-|---|---:|---:|---:|---:|
-| MV-SAM3D baseline | `45.8759e-3` | `13.242106` | `0.805061` | `0.279508` |
-| This version | `44.7949e-3` | `13.552471` | `0.813360` | `0.273675` |
-| Relative | `+2.36%` | `+2.34%` | `+1.03%` | `+2.09%` |
-
-`full30 approx` means equal average of train15 and val15. The NVS renderer is a
-fixed self-built bridge using MV-SAM3D GaussianRenderer, not an official
-unreleased paper renderer.
-
 ## Current Artifact Status
 
 The original full output directories for this exact version were not present on

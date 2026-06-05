@@ -92,15 +92,12 @@ This is why the method is conservative. It never blends color, opacity, scale,
 rotation, or SH appearance fields. It also does not force incompatible topology
 to match.
 
-## Why This Helped
+## Design Rationale
 
-The source-A softVH branch already has stable four-metric gains over the
-baseline. The no-VGGT axis2 branch can improve some geometry failures. The
-same-index blend lets the method absorb axis2 geometry where the two outputs are
-compatible, while falling back to the safer source-A output elsewhere.
-
-The result improved full30 approximate CD and NVS metrics compared with the
-baseline, but it did not reach the original goal of +5% on all four metrics.
+The source-A softVH branch is used as the conservative base. The no-VGGT axis2
+branch can address some geometry failures, and the same-index blend lets the
+method absorb axis2 geometry where the two outputs are compatible while falling
+back to source A elsewhere.
 
 ## Limitations
 
