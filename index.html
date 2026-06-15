@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en-US">
+<link rel="stylesheet" href="styles.css">
+<link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,600,400italic,600italic,300,300italic'
+      rel='stylesheet' type='text/css'>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>GeneralVLA-2: Geometry-Aware Reconstruction and Governed Memory for Robot Planning</title>
+    <meta name="HandheldFriendly" content="True"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="canonical" href="https://chiaraplizzari.github.io/OSNOM/"/>
+    <meta name="referrer" content="no-referrer-when-downgrade"/>
+
+    <meta property="og:site_name" content="OSNOM"/>
+    <meta property="og:type" content="video.other"/>
+    <meta property="og:title" content="OSNOM"/>
+    <meta property="og:description"
+          content="C. Plizzari, T. Perrett, B. Caputo, D.Damen. ARGO1M-what-can-a-cook."/>
+    <meta property="og:url" content="https://chiaraplizzari.github.io"/>
+    <meta property="og:image" content="https://github.com/Chiaraplizz/project-page/tree/gh-pages/teaser_OSNOM.png"/>
+    <meta property="og:image:width" content="2848"/>
+    <meta property="og:image:height" content="974"/>
+
+    <meta property="article:publisher" content="https://github.com/chiaraplizz"/>
+	
+    <meta name="twitter:card" content="teaser_OSNOM.png"/>
+    <meta name="twitter:title" content="What can a cook in Italy teach a mechanic in India? Action Recognition Generalisation Over Scenarios and Locations"/>
+    <meta name="twitter:description"
+          content="C. Plizzari, T. Perrett, B. Caputo, D.Damen. ARGO1M-what-can-a-cook."/>
+    <meta name="twitter:image" content="https://github.com/Chiaraplizz/project-page/tree/gh-pages/teaser_OSNOM.png"/>
+    <meta name="twitter:site" content="@chiaraplizz"/>
+    
+</head>
+
+<body>
+<div max-width=100%>
+    <br><br><br>
+    <span style="font-size:44px;font-weight:bold;">GeneralVLA-2: Geometry-Aware Reconstruction and<br>
+        Governed Memory for Robot Planning</span><br/>
+
+    <!-- <span style="font-size:44px;color:#fca503;font-weight:bold;">Paper 2026</span><br/> -->
+
+    <div style="max-width:1000px;margin:18px auto 8px;text-align:center;line-height:1.65;">
+        <div style="font-size:20px;">
+            Haoyu Wang<sup>1*</sup>&nbsp;&nbsp;&nbsp;
+            Guoqing Ma<sup>2*</sup>&nbsp;&nbsp;&nbsp;
+            <a href="https://steve-zeyu-zhang.github.io/" target="_blank" style="color:inherit;">Zeyu Zhang</a><sup>1*&dagger;</sup>&nbsp;&nbsp;&nbsp;
+            Yandong Guo<sup>3</sup>&nbsp;&nbsp;&nbsp;
+            Boxin Shi<sup>1</sup>&nbsp;&nbsp;&nbsp;
+            Hao Tang<sup>1&ddagger;</sup>
+        </div>
+        <div style="font-size:18px;">
+            <sup>1</sup>School of Computer Science, Peking University&nbsp;&nbsp;&nbsp;
+            <sup>2</sup>CASIA&nbsp;&nbsp;&nbsp;
+            <sup>3</sup>AI<sup>2</sup> Robotics
+        </div>
+        <div style="font-size:14px;">
+            <sup>*</sup>Equal contribution.&nbsp;&nbsp;
+            <sup>&dagger;</sup>Project lead.&nbsp;&nbsp;
+            <sup>&ddagger;</sup>Corresponding author.
+        </div>
+    </div>
+    <div class="table-like" style="justify-content:space-evenly;max-width:700px;margin:auto;padding:5px">
+        
+        <div><span style="font-size:28px"><a href="https://arxiv.org/abs/">[Paper]</a></span></div>
+        <div><span style="font-size:28px"><a href="https://github.com/AIGeeksGroup/GeneralVLA-2">[Code]</a></span></div>
+	    <div><span style="font-size:28px"><a href="https://huggingface.co/AIGeeksGroup/GeneralVLA-2">[Model]</a></span></div>
+        
+
+
+    </div>
+<div style="width:800px; margin:0 auto; text-align: justify;">
+        <!--
+        <p>
+            <b>Summary:</b>...
+        </p>
+        -->
+
+       
+
+        <p>
+            <b>Abstract:</b> Generalist vision-language-action systems need object-centric 3D evidence and reusable manipulation experience to plan reliable robot trajectories. GeneralVLA provides a hierarchical interface for converting language and RGB-D observations into 3D end-effector paths, but two bottlenecks remain. First, monocular SAM3D-style object reconstruction can hallucinate pose and unseen geometry, while manipulation benefits from stable object shape when calibrated multi-view observations are available. Second, the original KnowledgeBank mainly retrieves semantically similar snippets and appends new knowledge, which makes it difficult to control memory quality, conflicts, confidence, and geometric relevance. To address the first challenge, we introduce GeoFuse-MV3D, a geometry-prior-guided MV-SAM3D reconstruction branch that verifies external geometry cues with input-view masks, applies soft visual-hull support, performs axis-wise refinement, and fuses only geometry while preserving appearance. To address the second challenge, we upgrade KnowledgeBank into a governed long-term memory system with explicit quality, confidence, lifecycle, verifier, and conflict metadata, together with precision-oriented retrieval. Finally, we evaluate the reconstruction branch on GSO-30 and the memory module on Terminal-Bench 2.0 and SWE-Bench Verified; GeoFuse-MV3D improves over the MV-SAM3D baseline by reducing CD and LPIPS by 2.20% and 2.02% while increasing PSNR and SSIM by 2.36% and 1.03%, and KnowledgeBank improves over ReasoningBank by 4.53% on Terminal-Bench SR and 3.73% on SWE-Bench resolve rate, while reducing AS by 4.95% and 5.65%, respectively.
+        </p>
+    </div>
+    <br>
+    <hr>
+
+
+	<h1 style="width:800px;margin:0 auto;text-align:center;"> Method Overview </h1>
+    <div style="width:800px; margin:0 auto; text-align: justify">
+        <figure style="margin:0;">
+            <img src="images/generalvla_robot_page-0001.jpg" alt="Overview of GeneralVLA-2 for robot manipulation" style="width:100%">
+            <figcaption>Overview of GeneralVLA-2 for robot manipulation. When calibrated multi-view object observations are available, GeoFuse-MV3D converts the views, masks, and camera poses into refined object-centric 3D evidence; the 3D-capable planning agent combines this evidence with governed KnowledgeBank retrieval; and the robot execution module follows the resulting multi-stage end-effector trajectory.</figcaption>
+        </figure>
+    </div>
+
+
+    <br>
+    <hr>
+
+    <h1 style="width:800px;margin:0 auto;text-align:center;"> GeoFuse-MV3D Reconstruction </h1>
+    <div style="width:800px; margin:0 auto; text-align: justify">
+        <figure style="margin:0;">
+            <img src="images/GeoFuse-MV3D2_page-0001.jpg" alt="GeoFuse-MV3D reconstruction branch in GeneralVLA-2" style="width:100%">
+            <figcaption>GeoFuse-MV3D reconstruction branch in GeneralVLA-2. The branch keeps the same multi-view inputs, masks, and poses as MV-SAM3D, then refines the baseline with two complementary geometry sources and conservative geometry-only fusion.</figcaption>
+        </figure>
+    </div>
+
+
+    <br>
+    <hr>
+
+    <h1 style="width:800px;margin:0 auto;text-align:center;"> Governed KnowledgeBank </h1>
+    <div style="width:800px; margin:0 auto; text-align: justify">
+        <figure style="margin:0;">
+            <img src="images/knowledgebank.drawio_page-0001.jpg" alt="Architecture of the governed KnowledgeBank module used by GeneralVLA-2" style="width:100%">
+            <figcaption>Architecture of the governed KnowledgeBank module used by GeneralVLA-2. The module writes verifier-labeled memories, retrieves high-quality records, and manages their lifecycle before conditioning the 3DAgent planner.</figcaption>
+        </figure>
+    </div>
+
+
+    <br>
+    <hr>
+
+    <h1 style="width:800px;margin:0 auto;text-align:center;"> Simulation </h1>
+    <div style="width:800px; margin:0 auto; text-align: justify">
+        <div style="display:flex;gap:12px;justify-content:center;align-items:flex-start;width:100%;max-width:none;margin:0;padding:0;box-sizing:border-box;">
+            <video src="videos/buttons.mp4" style="width:calc((100% - 24px) / 3);height:auto;" autoplay muted loop playsinline></video>
+            <video src="videos/cup.mp4" style="width:calc((100% - 24px) / 3);height:auto;" autoplay muted loop playsinline></video>
+            <video src="videos/lamp.mp4" style="width:calc((100% - 24px) / 3);height:auto;" autoplay muted loop playsinline></video>
+        </div>
+    </div>
+
+    <br>
+    <hr>
+
+    <h1 style="width:800px;margin:0 auto;text-align:center;"> Real World </h1>
+    <div style="width:800px; margin:0 auto; text-align: justify">
+        <div style="display:flex;gap:12px;justify-content:center;align-items:flex-start;width:100%;max-width:none;margin:0;padding:0;box-sizing:border-box;">
+            <video src="videos/1.mp4" style="width:calc((100% - 24px) / 3);height:auto;" autoplay muted loop playsinline></video>
+            <video src="videos/2.mp4" style="width:calc((100% - 24px) / 3);height:auto;" autoplay muted loop playsinline></video>
+            <video src="videos/3.mp4" style="width:calc((100% - 24px) / 3);height:auto;" autoplay muted loop playsinline></video>
+        </div>
+    </div>
+
+    <br>
+    <hr>
+
+    <h1 style="width:800px;margin:0 auto;text-align:center;"> MV-SAM3D vs GeoFuse-MV3D </h1>
+    <div style="width:800px; margin:0 auto; text-align: justify">
+        <figure style="margin:0;">
+            <img src="images/appendix_mvsam3d_geofuse_comparison_page-0001.jpg" alt="Additional qualitative comparison between MV-SAM3D and GeoFuse-MV3D on the first set of GSO-30 objects" style="width:100%">
+            <figcaption>Additional qualitative comparison between MV-SAM3D and GeoFuse-MV3D on the first set of GSO-30 objects. Each row uses the same five input views, masks, and camera poses for both methods.</figcaption>
+        </figure>
+        <figure style="margin:22px 0 0;">
+            <img src="images/appendix_mvsam3d_geofuse_comparison_page-0002.jpg" alt="Additional qualitative comparison between MV-SAM3D and GeoFuse-MV3D on the second set of GSO-30 objects" style="width:100%">
+            <figcaption>Additional qualitative comparison between MV-SAM3D and GeoFuse-MV3D on the second set of GSO-30 objects. GeoFuse-MV3D applies mask-verified, appearance-preserving geometry refinement, improving object completeness and pose consistency without changing the input protocol.</figcaption>
+        </figure>
+    </div>
+
+    <br>
+    <hr>
+			
+
+
+        <!-- <div class="row">
+        <div style="width:800px; margin:0 auto; text-align: justify;">
+            <h2>Poster</h2>
+            <a href="poster.pdf" target="_blank"><img src="poster.png"/></a>
+        </div>
+        </div> -->
+	
+
+        <div class="row">
+        <div style="width:800px; margin:0 auto; text-align: justify;">
+            <h2>Bibtex</h2>
+            <p style="  width:800px; 
+		        margin:0 auto; 
+		        text-align: justify;
+                        display: block;
+                        padding: 9.5px;
+                        font-size: 13px;
+                        line-height: 1.428571429;
+                        color: #333;
+                        word-break: break-all;
+                        word-wrap: break-word;
+                        background-color: #f5f5f5;
+                        border: 1px solid #ccc;
+                        border-radius: 4px;
+                        ">
+            <tt>@article{Wang2026GeneralVLA2,<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;title={GeneralVLA-2: Geometry-Aware Reconstruction and Governed Memory for Robot Planning},<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;author={Wang, Haoyu and Ma, Guoqing and Zhang, Zeyu and Guo, Yandong and Shi, Boxin and Tang, Hao},<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;journal={Tech Report},<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;year={2026}<br/>
+                }</tt>
+            </p>
+        </div>
+        </div></section>
+
+
+    <!-- <hr>
+<div style="width:800px; margin:0 auto; text-align: justify;">
+<p>	
+<b>Acknowledgements</b> <br>
+	Research at Bristol is supported by
+EPSRC Fellowship UMPIRE (EP/T004991/1) and EPSRC
+Program Grant Visual AI (EP/T028572/1). We particularly
+thank Jitendra Malik for early discussions and insights on this work. We also
+thank members of the BAIR community for helpful discussions.
+            This project acknowledges the use of University of Bristol’s Blue Crystal 4
+(BC4) HPC facilities. 
+</p>
+</div> -->
+
+
+</body>
+</html>
