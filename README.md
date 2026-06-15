@@ -1,5 +1,16 @@
 # GeneralVLA-2: Geometry-Aware Reconstruction and Governed Memory for Robot Planning
 
+This is the official repository for the paper:
+> **GeneralVLA-2: Geometry-Aware Reconstruction and Governed Memory for Robot Planning**
+>
+> Haoyu Wang\*, Guoqing Ma\*, [Zeyu Zhang](https://steve-zeyu-zhang.github.io/)\*†, Yandong Guo, Boxin Shi, and [Hao Tang](https://ha0tang.github.io/)<sup>#</sup>
+>
+> \*Equal contribution. †Project lead. <sup>#</sup>Corresponding author.
+>
+> ### [Paper](https://arxiv.org/abs/) | [Website](https://aigeeksgroup.github.io/GeneralVLA-2) | [Models](https://huggingface.co/AIGeeksGroup/GeneralVLA-2) | [HF Paper](https://huggingface.co/papers/)
+
+<img width="3458" height="1404" alt="generalvla_robot_page-0001" src="https://github.com/user-attachments/assets/903f473c-89f4-4889-a94c-37e6483e1149" />
+
 
 This repository contains three code components used in the GeneralVLA project:
 
